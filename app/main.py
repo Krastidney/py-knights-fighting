@@ -1,4 +1,3 @@
-from app.knights.knight_dict import KNIGHTS
 from app.knights.arthur import Arthur
 from app.knights.lancelot import Lancelot
 from app.knights.red_knight import RedKnight
@@ -6,10 +5,22 @@ from app.knights.mordred import Mordred
 
 
 def battle(knights: dict) -> None:
-    arthur = Arthur(**knights["arthur"])
-    lancelot = Lancelot(**knights["lancelot"])
-    mordred = Mordred(**knights["mordred"])
-    red_knight = RedKnight(**knights["red_knight"])
+    knight_classes = {
+        "arthur": Arthur,
+        "lancelot": Lancelot,
+        "mordred": Mordred,
+        "red_knight": RedKnight,
+    }
+
+    knight_objects = {
+        key: knight_class(**knights[key])
+        for key, knight_class in knight_classes.items()
+    }
+
+    arthur = knight_objects["arthur"]
+    lancelot = knight_objects["lancelot"]
+    mordred = knight_objects["mordred"]
+    red_knight = knight_objects["red_knight"]
 
     # BATTLE:
 
@@ -42,6 +53,3 @@ def battle(knights: dict) -> None:
         mordred.name: mordred.hp,
         red_knight.name: red_knight.hp,
     }
-
-
-print(battle(KNIGHTS))

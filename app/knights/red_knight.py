@@ -6,7 +6,7 @@ class RedKnight(Knight):
     def __init__(
         self,
         name: str,
-        power: str,
+        power: int,
         hp: int,
         armour: list,
         weapon: dict,
